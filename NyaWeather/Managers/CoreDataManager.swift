@@ -32,6 +32,7 @@ struct CoreDataManager {
         weatherItem.name = response.name
         weatherItem.temp = response.main.temp
         weatherItem.desc = response.weather.first?.description
+        weatherItem.condition = response.weather.first?.main
         weatherItem.wind = response.wind.speed
         weatherItem.type = type
 

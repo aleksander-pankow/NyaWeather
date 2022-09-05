@@ -29,6 +29,7 @@ struct ContentView: View {
                         LoadingView()
                             .task {
                                 do {
+                                    locationManager.requestLocation()
                                     await vm.getCurrentWeather(
                                         latitude: (locationManager.lastLocation?.coordinate.latitude)!,
                                         longitude: (locationManager.lastLocation?.coordinate.longitude)!)
@@ -46,6 +47,7 @@ struct ContentView: View {
             }
             .task {
                 do {
+                    locationManager.requestLocation()
                     await vm.getCurrentWeather(
                         latitude: (locationManager.lastLocation?.coordinate.latitude)!,
                         longitude: (locationManager.lastLocation?.coordinate.longitude)!)

@@ -36,10 +36,10 @@ struct WeatherView: View {
                     .font(.footnote)
                     .opacity(0.4)
             }
-            Text(vm.getCurrentTips(reason: weather.desc ?? "Empty"))
+            Text(vm.getCurrentTips(condition: weather.condition ?? "Empty", description: weather.desc ?? "Empty"))
                 .multilineTextAlignment(.center)
             Button("Delete"){
-                CoreDataManager.shared.delete(item: weather)
+                CoreDataManager.shared.delete(item: self.weather)
             }
         }
         .frame(width: UIScreen.main.bounds.width - 30)
