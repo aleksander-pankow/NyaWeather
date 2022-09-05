@@ -22,13 +22,6 @@ struct ContentView: View {
                         TabView{
                             ForEach(items, id: \.self) { item in
                                 WeatherView(weather: item)
-                                    .frame(width: UIScreen.main.bounds.width - 30)
-                                    .padding()
-                                    .overlay{
-                                        Button("Delete"){
-                                            CoreDataManager.shared.delete(item: item)
-                                        }
-                                    }
                             }
                         }.tabViewStyle(PageTabViewStyle())
                         
@@ -36,7 +29,8 @@ struct ContentView: View {
                         LoadingView()
                             .task {
                                 do {
-                                    await vm.getWeather(
+                                    locationManager.requestLocation()
+                                    await vm.getCurrentWeather(
                                         latitude: (locationManager.lastLocation?.coordinate.latitude)!,
                                         longitude: (locationManager.lastLocation?.coordinate.longitude)!)
                                 }
@@ -49,6 +43,14 @@ struct ContentView: View {
                         WelcomeView()
                             .environmentObject(locationManager)
                     }
+                }
+            }
+            .task {
+                do {
+                    locationManager.requestLocation()
+                    await vm.getCurrentWeather(
+                        latitude: (locationManager.lastLocation?.coordinate.latitude)!,
+                        longitude: (locationManager.lastLocation?.coordinate.longitude)!)
                 }
             }
         }
