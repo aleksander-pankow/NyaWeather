@@ -10,6 +10,7 @@ import SwiftUI
 struct WeatherView: View {
     
     @ObservedObject var weather: WeatherItem
+    @StateObject var vm = WeatherViewModel()
     
     var body: some View {
         VStack(spacing: 16) {
@@ -24,7 +25,6 @@ struct WeatherView: View {
             Text(weather.desc?.capitalized ?? "null")
                 .font(.headline)
                 .foregroundColor(.secondary)
-        
             HStack{
                 Image("wind")
                     .resizable()
@@ -32,10 +32,17 @@ struct WeatherView: View {
                     .foregroundColor(Color.white)
                     .frame(width: 25.0, height: 25.0)
                 Text("\(Int(weather.wind.rounded()))")
-                Text("km/s")
+                Text("km/h")
                     .font(.footnote)
                     .opacity(0.4)
             }
+            Text(vm.getCurrentTips(reason: weather.desc ?? "Empty"))
+                .multilineTextAlignment(.center)
+            Button("Delete"){
+                CoreDataManager.shared.delete(item: weather)
+            }
         }
+        .frame(width: UIScreen.main.bounds.width - 30)
+        .padding()
     }
 }

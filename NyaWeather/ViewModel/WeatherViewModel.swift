@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class WeatherViewModel: ObservableObject {
+final class WeatherViewModel: ObservableObject {
     
     @Published var weather =  [WeatherModel]()
     @Published var weatherLoadingError: String = ""
@@ -16,6 +16,7 @@ class WeatherViewModel: ObservableObject {
     @Published var showAlert: Bool = false
     @Published var locationManager = LocationManager()
     @Published var coreDataManager = CoreDataManager.shared
+    @Published var tips: Array<String> = []
     
     private var cancellableSet: Set<AnyCancellable> = []
     var dataManager: NetworkManagerProtocol
@@ -24,8 +25,16 @@ class WeatherViewModel: ObservableObject {
         self.dataManager = dataManager
     }
     
-    func getWeather(latitude: Double, longitude: Double) async{
-        let getWeather = try! await dataManager.fetchWeather(latitude: latitude, longitude: longitude)
-        coreDataManager.save(response: getWeather)
+    func getCurrentWeather(latitude: Double, longitude: Double) async{
+        let getCurrentWeather = try! await dataManager.fetchWeather(latitude: latitude, longitude: longitude)
+        coreDataManager.save(response: getCurrentWeather, type: "current")
+    }
+    
+    func getCurrentTips(reason: String) -> String{
+        
+        switch reason {
+            case "clear sky": return "Now the weather is good! It's time to smile and soak up the warm sunny mood!"
+            default: return "unknown"
+        }
     }
 }

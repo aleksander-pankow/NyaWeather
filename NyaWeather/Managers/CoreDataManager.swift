@@ -26,13 +26,14 @@ struct CoreDataManager {
         container.viewContext.automaticallyMergesChangesFromParent = true
         container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
     }
-    func save(response: WeatherModel){
+    func save(response: WeatherModel, type: String){
         let context = container.viewContext
         let weatherItem = WeatherItem(context: context)
         weatherItem.name = response.name
         weatherItem.temp = response.main.temp
         weatherItem.desc = response.weather.first?.description
         weatherItem.wind = response.wind.speed
+        weatherItem.type = type
 
         do {
             try context.save()
