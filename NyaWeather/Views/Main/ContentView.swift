@@ -22,10 +22,13 @@ struct ContentView: View {
                         TabView{
                             ForEach(items, id: \.self) { item in
                                 WeatherView(weather: item)
+                                    
                             }
-                        }.tabViewStyle(PageTabViewStyle())
+                        }
+                        .tabViewStyle(PageTabViewStyle())
                         
                     } else {
+                        //get current weather if CoreData empty
                         LoadingView()
                             .task {
                                 do {
@@ -45,12 +48,17 @@ struct ContentView: View {
                     }
                 }
             }
-            .task {
-                do {
-                    locationManager.requestLocation()
-                    await vm.getCurrentWeather(
-                        latitude: (locationManager.lastLocation?.coordinate.latitude)!,
-                        longitude: (locationManager.lastLocation?.coordinate.longitude)!)
+            //Update every 60s
+            .onAppear{
+                Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { timer in
+                    vm.isLoading = true
+                    Task{
+                        locationManager.requestLocation()
+                        await vm.getCurrentWeather(
+                            latitude: (locationManager.lastLocation?.coordinate.latitude)!,
+                            longitude: (locationManager.lastLocation?.coordinate.longitude)!)
+                    }
+                    print("Iteration")
                 }
             }
         }

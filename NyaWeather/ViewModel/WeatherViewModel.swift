@@ -124,10 +124,10 @@ final class WeatherViewModel: ObservableObject {
             }
             case ContitionWeather.clouds.rawValue:
             switch description {
-                case "few clouds: 11-25%": return "few clouds: 11-25%"
-                case "scattered clouds: 25-50%": return "scattered clouds: 25-50%"
-                case "broken clouds: 51-84%": return "broken clouds: 51-84%"
-                case "overcast clouds: 85-100%": return "overcast clouds: 85-100%"
+                case "few clouds": return "few clouds: 11-25%"
+                case "scattered clouds": return "scattered clouds: 25-50%"
+                case "broken clouds": return "broken clouds: 51-84%"
+                case "overcast clouds": return "overcast clouds: 85-100%"
                 default: return "unknown clouds"
             }
             default: return "unknown condition"
