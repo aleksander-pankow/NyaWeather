@@ -22,7 +22,7 @@ struct ContentView: View {
                         TabView{
                             ForEach(items, id: \.self) { item in
                                 WeatherView(weather: item)
-                                    
+                                
                             }
                         }
                         .tabViewStyle(PageTabViewStyle())
@@ -48,9 +48,17 @@ struct ContentView: View {
                     }
                 }
             }
-            //Update every 60s
+            //Update every 10m
             .onAppear{
-                Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { timer in
+                Task{
+                    do{
+                        locationManager.requestLocation()
+                        await vm.getCurrentWeather(
+                            latitude: (locationManager.lastLocation?.coordinate.latitude)!,
+                            longitude: (locationManager.lastLocation?.coordinate.longitude)!)
+                    }
+                }
+                Timer.scheduledTimer(withTimeInterval: 600, repeats: true) { timer in
                     vm.isLoading = true
                     Task{
                         locationManager.requestLocation()

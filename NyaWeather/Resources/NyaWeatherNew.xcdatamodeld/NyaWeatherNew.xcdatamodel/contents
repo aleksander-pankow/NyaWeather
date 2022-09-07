@@ -3,6 +3,7 @@
     <entity name="WeatherItem" representedClassName="WeatherItem" syncable="YES" codeGenerationType="class">
         <attribute name="condition" optional="YES" attributeType="String"/>
         <attribute name="desc" optional="YES" attributeType="String"/>
+        <attribute name="humidity" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="lon" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
@@ -16,6 +17,6 @@
         </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="WeatherItem" positionX="-63" positionY="-18" width="128" height="149"/>
+        <element name="WeatherItem" positionX="-63" positionY="-18" width="128" height="164"/>
     </elements>
 </model>

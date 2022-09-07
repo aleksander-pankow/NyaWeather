@@ -30,7 +30,10 @@ final class WeatherViewModel: ObservableObject {
         coreDataManager.save(response: getCurrentWeather, type: "current")
     }
     
-    func getCurrentTips(condition: String, description: String) -> String{
+    func getCurrentTips(condition: String, description: String, humidity: Double) -> Void{
+        
+        var tipsList: Array<String>
+        
         enum ContitionWeather : String {
             case thunderstorm = "Thunderstorm"
             case drizzle = "Drizzle"
@@ -41,96 +44,381 @@ final class WeatherViewModel: ObservableObject {
             case clouds = "Clouds"
         }
         
+        switch humidity {
+        case 0.0...20.0:
+            tipsList =
+            [
+                "It's dry outside",
+                "We recommend using a moisturizer, hygienic lipstick and of course",
+                "DON'T FORGET TO DRINK WATER!"
+            ]
+            for item in tipsList {
+                tips.append(item)
+            }
+            
+        case 20.0...35.0:
+            tipsList = [
+                "Outdoor humidity is slightly below normal",
+                "If you have dry skin, take care of it and apply a moisturizer",
+                "Hygienic lipstick will not be superfluous in your pocket"
+            ]
+            for item in tipsList {
+                tips.append(item)
+            }
+        case 35.0...60.0:
+            tipsList = ["The humidity is at its optimum right now. You will feel great!"]
+            for item in tipsList {
+                tips.append(item)
+            }
+        case 60.0...100.0:
+            tipsList = ["Humidity is high."]
+            for item in tipsList {
+                tips.append(item)
+            }
+        default:
+            tipsList = ["unknown humidity"]
+            tips.append(tipsList[0])
+        }
+        
+        
         switch condition {
-            case ContitionWeather.clear.rawValue:
+        case ContitionWeather.thunderstorm.rawValue:
             switch description {
-                case "clear sky": return "Now the weather is good! It's time to smile and soak up the warm sunny mood!"
-                default: return "unknown clear sky"
+            case "thunderstorm with light rain":
+                tipsList = ["Now the weather is good! It's time to smile and soak up the warm sunny mood!"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "thunderstorm with rain":
+                tipsList = ["thunderstorm with rain"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "thunderstorm with heavy rain":
+                tipsList = ["thunderstorm with heavy rain"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "light thunderstorm":
+                tipsList = ["light thunderstorm"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "thunderstorm":
+                tipsList = ["thunderstorm"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "heavy thunderstorm":
+                tipsList = ["heavy thunderstorm"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "ragged thunderstorm":
+                tipsList = ["ragged thunderstorm"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "thunderstorm with light drizzle":
+                tipsList = ["thunderstorm with light drizzle"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "thunderstorm with drizzle":
+                tipsList = ["thunderstorm with drizzle"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "thunderstorm with heavy drizzle":
+                tipsList = ["thunderstorm with heavy drizzle"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+                
+            default:
+                tipsList = ["unknown thunderstorm"]
+                for item in tipsList {
+                    tips.append(item)
+                }
             }
-            case ContitionWeather.thunderstorm.rawValue:
+        case ContitionWeather.drizzle.rawValue:
             switch description {
-                case "thunderstorm with light rain": return "thunderstorm with light rain"
-                case "thunderstorm with rain": return "thunderstorm with rain"
-                case "thunderstorm with heavy rain": return "thunderstorm with heavy rain"
-                case "light thunderstorm": return "light thunderstorm"
-                case "thunderstorm": return "thunderstorm"
-                case "heavy thunderstorm": return "heavy thunderstorm"
-                case "ragged thunderstorm": return "ragged thunderstorm"
-                case "thunderstorm with light drizzle": return "thunderstorm with light drizzle"
-                case "thunderstorm with drizzle": return "thunderstorm with drizzle"
-                case "thunderstorm with heavy drizzle": return "thunderstorm with heavy drizzle"
-                default: return "unknown thunderstorm"
+            case "light intensity drizzle":
+                tipsList = ["light intensity drizzle"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "drizzle":
+                tipsList = ["drizzle"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "heavy intensity drizzle":
+                tipsList = ["heavy intensity drizzle"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "light intensity drizzle rain":
+                tipsList = ["light intensity drizzle rain"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "drizzle rain":
+                tipsList = ["drizzle rain"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "heavy intensity drizzle rain":
+                tipsList = ["heavy intensity drizzle rain"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "shower rain and drizzle":
+                tipsList = ["shower rain and drizzle"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "heavy shower rain and drizzle":
+                tipsList = ["heavy shower rain and drizzle"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "shower drizzle":
+                tipsList = ["shower drizzle"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            default:
+                tipsList = ["unknown drizzle"]
+                for item in tipsList {
+                    tips.append(item)
+                }
             }
-            case ContitionWeather.drizzle.rawValue:
+        case ContitionWeather.rain.rawValue:
             switch description {
-                case "light intensity drizzle": return "light intensity drizzle"
-                case "drizzle": return "drizzle"
-                case "heavy intensity drizzle": return "heavy intensity drizzle"
-                case "light intensity drizzle rain": return "light intensity drizzle rain"
-                case "drizzle rain": return "drizzle rain"
-                case "heavy intensity drizzle rain": return "heavy intensity drizzle rain"
-                case "shower rain and drizzle": return "shower rain and drizzle"
-                case "heavy shower rain and drizzle": return "heavy shower rain and drizzle"
-                case "shower drizzle": return "shower drizzle"
-                default: return "unknown drizzle"
+            case "light rain":
+                tipsList = ["light rain"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "moderate rain":
+                tipsList = ["moderate rain"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "heavy intensity rain":
+                tipsList = ["heavy intensity rain"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "very heavy rain":
+                tipsList = ["very heavy rain"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "extreme rain":
+                tipsList = ["extreme rain"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "freezing rain":
+                tipsList = ["freezing rain"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "light intensity shower rain":
+                tipsList = ["light intensity shower rain"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "shower rain":
+                tipsList = ["shower rain"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "heavy intensity shower rain":
+                tipsList = ["heavy intensity shower rain"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "ragged shower rain":
+                tipsList = ["ragged shower rain"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            default:
+                tipsList = ["unknown rain"]
+                for item in tipsList {
+                    tips.append(item)
+                }
             }
-            case ContitionWeather.rain.rawValue:
+        case ContitionWeather.snow.rawValue:
             switch description {
-                case "light rain": return "light rain"
-                case "moderate rain": return "moderate rain"
-                case "heavy intensity rain": return "heavy intensity rain"
-                case "very heavy rain": return "very heavy rain"
-                case "extreme rain": return "extreme rain"
-                case "freezing rain": return "freezing rain"
-                case "light intensity shower rain": return "light intensity shower rain"
-                case "shower rain": return "shower rain"
-                case "heavy intensity shower rain": return "heavy intensity shower rain"
-                case "ragged shower rain": return "ragged shower rain"
-                default: return "unknown rain"
+            case "light snow":
+                tipsList = ["light snow"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "Snow":
+                tipsList = ["Snow"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "Heavy snow":
+                tipsList = ["Heavy snow"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "Sleet":
+                tipsList = ["Sleet"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "Light shower sleet":
+                tipsList = ["Light shower sleet"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "Shower sleet":
+                tipsList = ["Shower sleet"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "Light rain and snow":
+                tipsList = ["Light rain and snow"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "Rain and snow":
+                tipsList = ["Rain and snow"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "Light shower snow":
+                tipsList = ["Light shower snow"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "Shower snow":
+                tipsList = ["Shower snow"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "Heavy shower snow":
+                tipsList = ["Heavy shower snow"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            default:
+                tipsList = ["unknown snow"]
+                for item in tipsList {
+                    tips.append(item)
+                }
             }
-            case ContitionWeather.snow.rawValue:
+        case ContitionWeather.atmosphere.rawValue:
             switch description {
-                case "light snow": return "light snow"
-                case "Snow": return "Snow"
-                case "Heavy snow": return "Heavy snow"
-                case "Sleet": return "Sleet"
-                case "Light shower sleet": return "Light shower sleet"
-                case "Shower sleet": return "Shower sleet"
-                case "Light rain and snow": return "Light rain and snow"
-                case "Rain and snow": return "Rain and snow"
-                case "Light shower snow": return "Light shower snow"
-                case "Shower snow": return "Shower snow"
-                case "Heavy shower snow": return "Heavy shower snow"
-                default: return "unknown snow"
+            case "mist":
+                tipsList = ["Mist"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "Smoke":
+                tipsList = ["Smoke"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "Haze":
+                tipsList = ["Haze"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "sand/ dust whirls":
+                tipsList = ["sand/ dust whirls"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "fog":
+                tipsList = ["Fog"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "sand":
+                tipsList = ["Sand"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "dust":
+                tipsList = ["Dust"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "volcanic ash":
+                tipsList = ["volcanic ash"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "squalls":
+                tipsList = ["squalls"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "tornado":
+                tipsList = ["tornado"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            default:
+                tipsList = ["unknown atmosphere"]
+                for item in tipsList {
+                    tips.append(item)
+                }
             }
-            case ContitionWeather.atmosphere.rawValue:
+        case ContitionWeather.clear.rawValue:
             switch description {
-                case "mist": return "mist"
-                case "Smoke": return "Smoke"
-                case "Haze": return "Haze"
-                case "sand/ dust whirls": return "sand/ dust whirls"
-                case "fog": return "fog"
-                case "sand": return "sand"
-                case "dust": return "dust"
-                case "volcanic ash": return "volcanic ash"
-                case "squalls": return "squalls"
-                case "tornado": return "tornado"
-                default: return "unknown atmosphere"
+            case "clear sky":
+                tipsList = ["Now the weather is good! It's time to smile and soak up the warm sunny mood!"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            default:
+                tipsList = ["unknown clear sky"]
+                for item in tipsList {
+                    tips.append(item)
+                }
             }
-            case ContitionWeather.clear.rawValue:
+        case ContitionWeather.clouds.rawValue:
             switch description {
-                case "clear sky": return "Now the weather is good! It's time to smile and soak up the warm sunny mood!"
-                default: return "unknown clear sky"
+            case "few clouds":
+                tipsList = ["few clouds: 11-25%"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "scattered clouds":
+                tipsList = ["scattered clouds: 25-50%"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "broken clouds":
+                tipsList = ["broken clouds: 51-84%"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            case "overcast clouds":
+                tipsList = ["overcast clouds: 85-100%"]
+                for item in tipsList {
+                    tips.append(item)
+                }
+            default:
+                tipsList = ["unknown clouds"]
+                for item in tipsList {
+                    tips.append(item)
+                }
             }
-            case ContitionWeather.clouds.rawValue:
-            switch description {
-                case "few clouds": return "few clouds: 11-25%"
-                case "scattered clouds": return "scattered clouds: 25-50%"
-                case "broken clouds": return "broken clouds: 51-84%"
-                case "overcast clouds": return "overcast clouds: 85-100%"
-                default: return "unknown clouds"
+        default:
+            tipsList = ["unknown condition"]
+            for item in tipsList {
+                tips.append(item)
             }
-            default: return "unknown condition"
         }
     }
 }

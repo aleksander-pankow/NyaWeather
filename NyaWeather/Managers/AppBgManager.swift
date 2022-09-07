@@ -14,7 +14,7 @@ class AppBgManager {
       
       let NEW_DAY = 0
       let MORNING = 6
-      let AFTERNOON = 6
+      let AFTERNOON = 12
       let EVENING = 18
       let MIDNIGHT = 24
       

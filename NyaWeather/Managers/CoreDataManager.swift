@@ -31,6 +31,7 @@ struct CoreDataManager {
         let weatherItem = WeatherItem(context: context)
         weatherItem.name = response.name
         weatherItem.temp = response.main.temp
+        weatherItem.humidity = response.main.humidity
         weatherItem.desc = response.weather.first?.description
         weatherItem.condition = response.weather.first?.main
         weatherItem.wind = response.wind.speed

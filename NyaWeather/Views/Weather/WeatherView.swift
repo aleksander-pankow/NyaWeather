@@ -26,23 +26,40 @@ struct WeatherView: View {
                 .font(.headline)
                 .foregroundColor(.secondary)
             HStack{
-                Image("wind")
-                    .resizable()
-                    .renderingMode(.template)
-                    .foregroundColor(Color.white)
-                    .frame(width: 25.0, height: 25.0)
-                Text("\(Int(weather.wind.rounded()))")
-                Text("km/h")
-                    .font(.footnote)
-                    .opacity(0.4)
+                HStack{
+                    Image("wind")
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundColor(Color.white)
+                        .frame(width: 25.0, height: 25.0)
+                    Text("\(Int(weather.wind.rounded()))")
+                    Text("m/s")
+                        .font(.footnote)
+                        .opacity(0.4)
+                }
+                HStack{
+                    Image("wet")
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundColor(Color.white)
+                        .frame(width: 25.0, height: 25.0)
+                    Text("\(Int(weather.humidity.rounded()))")
+                    Text("%")
+                        .font(.footnote)
+                        .opacity(0.4)
+                }
             }
-            Text(vm.getCurrentTips(condition: weather.condition ?? "Empty", description: weather.desc ?? "Empty"))
-                .multilineTextAlignment(.center)
+            ForEach(vm.tips, id: \.self) { tip in
+                Text(tip)
+            }
             Button("Delete"){
                 CoreDataManager.shared.delete(item: self.weather)
             }
         }
         .frame(width: UIScreen.main.bounds.width - 30)
         .padding()
+        .task(priority: .background){
+            vm.getCurrentTips(condition: weather.condition ?? "Empty", description: weather.desc ?? "Empty", humidity: weather.humidity)
+        }
     }
 }
