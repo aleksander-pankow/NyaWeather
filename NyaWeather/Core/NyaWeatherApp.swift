@@ -12,10 +12,9 @@ struct NyaWeatherApp: App {
     
     let coreDataManager = CoreDataManager.shared
     
-    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            WeatherListView()
                 .environment(\.managedObjectContext, coreDataManager.container.viewContext)
         }
     }

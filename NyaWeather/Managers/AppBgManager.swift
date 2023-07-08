@@ -13,9 +13,10 @@ class AppBgManager {
       let hour = Calendar.current.component(.hour, from: Date())
       
       let NEW_DAY = 0
-      let MORNING = 6
-      let AFTERNOON = 12
-      let EVENING = 18
+      let MORNING = 5
+      let AFTERNOON = 11
+      let EVENING = 16
+      let LATEVENING = 20
       let MIDNIGHT = 24
       
       var appBackground = Color("SunMorning").edgesIgnoringSafeArea(.all) // Default Color
@@ -27,8 +28,10 @@ class AppBgManager {
       case AFTERNOON..<EVENING:
           appBackground = Color("SunAfternoon").edgesIgnoringSafeArea(.all)
           print("AfterNoon")
-      case EVENING..<MIDNIGHT:
+      case EVENING..<LATEVENING:
           appBackground = Color("SunEvening").edgesIgnoringSafeArea(.all)
+      case LATEVENING..<MIDNIGHT:
+          appBackground = Color("LateEvening").edgesIgnoringSafeArea(.all)
       default:
           _ = Color("SunMorning").edgesIgnoringSafeArea(.all)
       }

@@ -17,6 +17,8 @@
 		E31F046628B2914E001393BB /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31F046528B2914E001393BB /* WelcomeView.swift */; };
 		E31F048828B2D0D3001393BB /* NyaWeatherNew.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E31F048628B2D0D3001393BB /* NyaWeatherNew.xcdatamodeld */; };
 		E31F048C28B6B0AB001393BB /* WeatherView_Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31F048B28B6B0AB001393BB /* WeatherView_Preview.swift */; };
+		E32DDE0428E0C93300FC8DDC /* WeatherListViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32DDE0328E0C93300FC8DDC /* WeatherListViewItem.swift */; };
+		E32DDE0628E0C93E00FC8DDC /* WeatherListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32DDE0528E0C93E00FC8DDC /* WeatherListView.swift */; };
 		E3A7F34328AA255800724191 /* NyaWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A7F34228AA255800724191 /* NyaWeatherApp.swift */; };
 		E3A7F34528AA255800724191 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A7F34428AA255800724191 /* ContentView.swift */; };
 		E3A7F34728AA255A00724191 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3A7F34628AA255A00724191 /* Assets.xcassets */; };
@@ -40,6 +42,8 @@
 		E31F046528B2914E001393BB /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		E31F048728B2D0D3001393BB /* NyaWeatherNew.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NyaWeatherNew.xcdatamodel; sourceTree = "<group>"; };
 		E31F048B28B6B0AB001393BB /* WeatherView_Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView_Preview.swift; sourceTree = "<group>"; };
+		E32DDE0328E0C93300FC8DDC /* WeatherListViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherListViewItem.swift; sourceTree = "<group>"; };
+		E32DDE0528E0C93E00FC8DDC /* WeatherListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherListView.swift; sourceTree = "<group>"; };
 		E3A7F33F28AA255800724191 /* NyaWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NyaWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3A7F34228AA255800724191 /* NyaWeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NyaWeatherApp.swift; sourceTree = "<group>"; };
 		E3A7F34428AA255800724191 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -94,6 +98,7 @@
 		E31F048928B4D6ED001393BB /* Weather */ = {
 			isa = PBXGroup;
 			children = (
+				E32DDE0228E0C90900FC8DDC /* List */,
 				E31F046128B29137001393BB /* WeatherView.swift */,
 				E31F048B28B6B0AB001393BB /* WeatherView_Preview.swift */,
 				E302498728C23F7700374750 /* WeatherViewItem.swift */,
@@ -118,6 +123,15 @@
 				E302497E28C0CAE400374750 /* Extension+String.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E32DDE0228E0C90900FC8DDC /* List */ = {
+			isa = PBXGroup;
+			children = (
+				E32DDE0328E0C93300FC8DDC /* WeatherListViewItem.swift */,
+				E32DDE0528E0C93E00FC8DDC /* WeatherListView.swift */,
+			);
+			path = List;
 			sourceTree = "<group>";
 		};
 		E3A7F33628AA255800724191 = {
@@ -278,11 +292,13 @@
 				E302498528C1FE9200374750 /* LocationManager.swift in Sources */,
 				E31F048828B2D0D3001393BB /* NyaWeatherNew.xcdatamodeld in Sources */,
 				E302497C28B82AE300374750 /* Extension+Color.swift in Sources */,
+				E32DDE0428E0C93300FC8DDC /* WeatherListViewItem.swift in Sources */,
 				E3A7F34528AA255800724191 /* ContentView.swift in Sources */,
 				E31F046628B2914E001393BB /* WelcomeView.swift in Sources */,
 				E3A7F35A28AA594C00724191 /* CoreDataManager.swift in Sources */,
 				E31F048C28B6B0AB001393BB /* WeatherView_Preview.swift in Sources */,
 				E3A7F34328AA255800724191 /* NyaWeatherApp.swift in Sources */,
+				E32DDE0628E0C93E00FC8DDC /* WeatherListView.swift in Sources */,
 				E3A7F35E28AA5BCE00724191 /* NetworkManager.swift in Sources */,
 				E3A7F36128AA5BEA00724191 /* WeatherModel.swift in Sources */,
 			);

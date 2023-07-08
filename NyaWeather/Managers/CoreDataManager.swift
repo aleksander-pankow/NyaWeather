@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-struct CoreDataManager {
+@MainActor struct CoreDataManager {
     static let shared = CoreDataManager()
 
     let container: NSPersistentContainer

@@ -1,32 +1,49 @@
 //
-//  ContentView.swift
+//  WeatherListView.swift
 //  NyaWeather
 //
-//  Created by Aleksander Pankow on 15/08/2022.
+//  Created by Aleksander Pankow on 25/09/2022.
 //
 
 import SwiftUI
 
-struct ContentView: View {
+struct WeatherListView: View {
     
     @StateObject var locationManager = LocationManager()
     @ObservedObject var vm = WeatherViewModel()
     @FetchRequest(sortDescriptors: []) var items: FetchedResults<WeatherItem>
+    @State private var searchText = ""
+    @State private var showingSheet = false
     
     var body: some View {
-        ZStack{
-            Color("Default").edgesIgnoringSafeArea(.all)
-            //AppBgManager.appBackground()
+        TextField("Search...", text: $searchText)
+            .searchable(text: $searchText) {
+                Text("Lol").foregroundColor(Color.white).padding(.all).searchCompletion("Complete")
+                Text("Lol").foregroundColor(Color.white).padding(.all).searchCompletion("Complete")
+                Text("Lol").foregroundColor(Color.white).padding(.all).searchCompletion("Complete")
+            }
+            .padding(.all)
+            .border(Color.white)
+        
+        NavigationView {
             VStack {
+                
                 if locationManager.lastLocation != nil {
                     if items.count > 0 {
-                        TabView{
-                            ForEach(items, id: \.self) { item in
-                                WeatherView(weather: item)
-                            }
+                        //List {
+                        ForEach(items, id: \.self) { item in
+                            //                            NavigationLink(destination: WeatherView(weather: item)){
+                            //                                WeatherListViewItem(weather: item)
+                            //                            }
+                            
+                            WeatherListViewItem(weather: item)
+                                .onTapGesture{
+                                    showingSheet.toggle()
+                                }
+                                .sheet(isPresented: $showingSheet){
+                                    WeatherView(weather: item)
+                                }
                         }
-                        .tabViewStyle(PageTabViewStyle())
-                        
                     } else {
                         //get current weather if CoreData empty
                         LoadingView()
@@ -69,6 +86,7 @@ struct ContentView: View {
                     print("Iteration")
                 }
             }
+            
         }
     }
 }

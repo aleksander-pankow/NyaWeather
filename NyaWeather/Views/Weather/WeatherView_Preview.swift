@@ -10,21 +10,58 @@ import SwiftUI
 struct WeatherView_Preview: View {
     
     var body: some View {
-        VStack {
-            Text("Kelsterbach")
-                .font(.headline)
-                .foregroundColor(.secondary)
-            Text("Title 2")
-                .font(.title)
-                .fontWeight(.black)
-                .foregroundColor(.primary)
-                .lineLimit(3)
-            Text("author.uppercased()")
-                .font(.caption)
-                .foregroundColor(.secondary)
+        ZStack{
+            Color("Default").edgesIgnoringSafeArea(.all)
+            Image("Sun-Clear")
+                .resizable()
+                .frame(width: 350, height: 350)
+                .padding()
+                .position(x: 80, y: -20)
+            VStack(spacing: 16) {
+                
+                Text("Kelsterbach")
+                    .font(.headline)
+                    .foregroundColor(.secondary)
+                Text("23°")
+                    .font(.title)
+                    .fontWeight(.black)
+                    .foregroundColor(.primary)
+                    .lineLimit(3)
+                Text("null")
+                    .font(.headline)
+                    .foregroundColor(.secondary)
+                HStack{
+                    HStack{
+                        Image("wind")
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(Color.white)
+                            .frame(width: 25.0, height: 25.0)
+                        Text("4")
+                        Text("m/s")
+                            .font(.footnote)
+                            .opacity(0.4)
+                    }
+                    HStack{
+                        Image("wet")
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(Color.white)
+                            .frame(width: 25.0, height: 25.0)
+                        Text("44")
+                        Text("%")
+                            .font(.footnote)
+                            .opacity(0.4)
+                    }
+                }
+            
+                Button("Delete"){
+                    
+                }
+            }
+            .frame(width: UIScreen.main.bounds.width - 30)
+            .padding()
         }
-        .padding()
-        .border(.white)
     }
 }
 
